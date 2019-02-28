@@ -6,6 +6,7 @@ module.exports = function(data, mesher, scaleFactor, three) {
 
 class Mesh {
   constructor(data, mesher, scaleFactor, three) {
+    let f
     this.THREE = three || THREE
     this.data = data
     const geometry = this.geometry = new this.THREE.Geometry()
@@ -22,16 +23,16 @@ class Mesh {
       geometry.vertices.push(new this.THREE.Vector3(q[0], q[1], q[2]))
     }
 
-    for (var i = 0; i < result.faces.length; ++i) {
+    for (let i = 0; i < result.faces.length; ++i) {
       geometry.faceVertexUvs[0].push(this.faceVertexUv(i))
 
-      var q = result.faces[i]
+      let q = result.faces[i]
       if (q.length === 5) {
-        var f = new this.THREE.Face4(q[0], q[1], q[2], q[3])
+        f = new this.THREE.Face4(q[0], q[1], q[2], q[3])
         f.color = new this.THREE.Color(q[4])
         geometry.faces.push(f)
-      } else if (q.length == 4) {
-        var f = new this.THREE.Face3(q[0], q[1], q[2])
+      } else if (q.length === 4) {
+        f = new this.THREE.Face3(q[0], q[1], q[2])
         f.color = new this.THREE.Color(q[3])
         geometry.faces.push(f)
       }
@@ -62,8 +63,8 @@ class Mesh {
 
 
   createSurfaceMesh(material) {
-    material = material || new this.THREE.MeshNormalMaterial()
-    var surfaceMesh = new this.THREE.Mesh(this.geometry, material)
+    material = material || new THREE.MeshNormalMaterial()
+    var surfaceMesh = new THREE.Mesh(this.geometry, material)
     surfaceMesh.scale = this.scale
     surfaceMesh.doubleSided = false
     this.surfaceMesh = surfaceMesh
@@ -78,8 +79,8 @@ class Mesh {
 
 
   setPosition(x, y, z) {
-    if (this.wireMesh) this.wireMesh.position = new this.THREE.Vector3(x, y, z)
-    if (this.surfaceMesh) this.surfaceMesh.position = new this.THREE.Vector3(x, y, z)
+    if (this.wireMesh) this.wireMesh.position = new THREE.Vector3(x, y, z)
+    if (this.surfaceMesh) this.surfaceMesh.position = new THREE.Vector3(x, y, z)
   }
 
 
@@ -132,17 +133,17 @@ class Mesh {
     }
     if ((size.z === 0 && spans.x0 < spans.x1) || (size.x === 0 && spans.y0 > spans.y1)) {
       return [
-        new this.THREE.Vector2(height, 0),
-        new this.THREE.Vector2(0, 0),
-        new this.THREE.Vector2(0, width),
-        new this.THREE.Vector2(height, width)
+        new THREE.Vector2(height, 0),
+        new THREE.Vector2(0, 0),
+        new THREE.Vector2(0, width),
+        new THREE.Vector2(height, width)
       ]
     } else {
       return [
-        new this.THREE.Vector2(0, 0),
-        new this.THREE.Vector2(0, height),
-        new this.THREE.Vector2(width, height),
-        new this.THREE.Vector2(width, 0)
+        new THREE.Vector2(0, 0),
+        new THREE.Vector2(0, height),
+        new THREE.Vector2(width, height),
+        new THREE.Vector2(width, 0)
       ]
     }
   }
