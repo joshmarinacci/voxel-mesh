@@ -12,6 +12,9 @@
     "email": "max@maxogden.com"
   },
   "license": "MIT",
+  "dependencies": {
+    "three": "0.56.0"
+  },
   "peerDependencies": {
     "three": "*"
   },
